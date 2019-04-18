@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- node
+services:
+- postgresql
+before_script:
+- psql -c 'CREATE DATABASE users;' -U postgres
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: eTMcy6Uc5XnOfLhdaHpGhTZyThw6Ez36IW+ywLwLsOWQj/IqID3J5szMchvhEaKQewvv9IRvA3XnPdb0GhNDNd3BvM/U6p2zvIzL99q683ArKDpd9hZsxa1FWkEbwr7kdXtQIQ94eV12Nw3iBmIGoOloZXqXi1BvUkPIa7UUvO4l7AmudkQ0TxZ6YpOmpJLzVnl05Uw0SA/JqAPbeiPHi6fjHNL0b4wpUoTbXYxO2+p3Sxt285pgifhpeRokc1v8qyzqxRfhC2Nz/a12Whr68MOC2Yad9p+ky9RKugY8RZCxvMFoI2b5UFDQ1dHTLcuQrpHJtx56RVzqduFf1gLK71va5j2B3MQ+G2my6vHB/BzvO5ec6Vpf33fdbnM/SNjf0ImYkrXRXtABxduExxEkKw5F9BpJAPOICYJcAovIdyTFEmk0pKN2LsIn/47YqiIAeuALJWsnsllK6g7njhMPDAitlY9cO8xiOZnf+FR8FBxbo5HnW0eIp2jdqbtnacEo4aFgVCOLAD2TnB+obDRMpvhc8IZBn5UKS+EZzJbRwvvjFYM/NMhlpmVm7dr4ari3nrQRWeHWKBpcpI3M3c0AqZ516UW123n7sliBK7LU+hDkKUSZLywTpUTspImCj4hwziZlbTXiXFP39uDy7WeZNGwrcYn5G93RFuCAUhHZGTk=
+  app: movie-tracker-cody-be
+  skip_cleanup: true
+scripts:
+  start: node server.js
+  test: NODE_ENV=test jest --exit
